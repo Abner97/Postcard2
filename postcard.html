@@ -1,0 +1,148 @@
+<head>
+	<style>
+		.Postcard {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-start;
+
+			border: 1px solid green;
+			width: 1000px;
+			margin: 2rem;
+			padding: 1rem;
+		}
+
+		.Postcard_img {
+			display: flex;
+			flex: 2;
+
+			border: 1px solid green;
+			height: 700px;
+			width: 100%;
+
+			background-image: url("https://i.pinimg.com/564x/b5/eb/0f/b5eb0f5066ed5e45feaed9c93250643f.jpg");
+			background-color: #cccccc;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		.Postcard_content {
+			display: flex;
+			flex: 1;
+		}
+
+		.PostcardContent {
+			display: flex;
+			flex: 1;
+
+			flex-direction: column;
+			justify-content: space-between;
+
+			padding: 1rem;
+		}
+
+		.PostcardContent_to,
+		.PostcardContent_from {
+			font-size: 1.5rem;
+			line-height: 1rem;
+			font-weight: 500;
+			text-align: right;
+			word-wrap: break-word;
+		}
+
+		.PostcardContent_message {
+			margin-top: 3rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="root"></div>
+
+	<script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.production.min.js"></script>
+	<script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+	<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+
+	<script type="text/babel">
+		const rootElement = document.getElementById('root');
+
+		const cardStyle = {
+			backgroundColor: '#92a8d1',
+			fontStyle: 'italic'
+		}
+
+
+
+		const Postcard = (props) => {
+
+			const [to, setTo] = React.useState("");
+			const [message, setMessage] = React.useState("");
+
+
+			function handleChange(event) {
+				setTo(event.target.value);
+			}
+
+
+			function handleMessage(event) {
+				setMessage(event.target.value);
+			}
+
+			function sendMessage(){
+				alert("Mensaje enviado a: "+to);
+			}
+
+			return (
+
+
+				<div className="Postcard" style={props.style} >
+					<div className="Postcard_img" />
+					<div className="Postcard_content">
+						<div className="PostcardContent">
+							<button onClick={sendMessage}> Send</button>
+							<p className="PostcardContent_to">To: {to}</p>
+							<input
+								id="username"
+								className="border border-gray-500 py-2 px-3 mb-5"
+								value={to}
+								onChange={handleChange}
+								/>
+
+								<p className="PostcardContent_from">From: Abraham</p>
+							<input
+							
+							id="message"
+								className="border border-gray-500 py-2 px-3 mb-5"
+								value={message}
+								onChange={handleMessage}
+							/>
+							<div className="PostcardContent_message">
+								{message}
+							</div>
+						
+						</div>
+					</div>
+					</div>
+
+					
+				
+			)
+		}
+
+
+
+		//proptypes!
+		Postcard.propTypes = {
+			style: PropTypes.object
+		}
+
+		const App = (
+			<Postcard style={cardStyle} >
+			</Postcard>
+		)
+
+		ReactDOM.render(App, rootElement);
+	</script>
+</body>
